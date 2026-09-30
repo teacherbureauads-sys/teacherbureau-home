@@ -14,10 +14,11 @@ let backendBase = (process.env.BACKEND_API_BASE_URL || DEFAULT_BACKEND)
   .replace(/\/+$/, "");
 
 // Every request from this site goes to <backend>/s/<siteKey>/api/...
-if (!/\/s\/[a-z0-9-]+$/.test(backendBase)) {
-  backendBase = `${backendBase}/s/${siteKey}`;
-}
-const backendBaseUrl = backendBase;
+// Strip any "/s/<anything>" someone may have already added (e.g. by hand
+// in Vercel's env vars) BEFORE appending it fresh — this is what stops the
+// URL turning into ".../s/teachersbureau/s/teachersbureau/api/..." (a 404).
+backendBase = backendBase.replace(/\/s\/[a-z0-9-]+$/, "");
+const backendBaseUrl = `${backendBase}/s/${siteKey}`;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
