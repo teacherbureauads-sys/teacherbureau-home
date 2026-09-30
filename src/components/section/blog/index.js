@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import moment from "moment";
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   BlogCardSkeleton,
@@ -24,23 +23,19 @@ const AllBlogs = ({ selectedCategory = null }) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  const router = useRouter();
   const toggleQueryParam = useToggleQueryParam();
 
-  // Teachers Bureau site key
-  const SITE_KEY = "teachersbureau";
-
-  // Backend URL
+  // Backend URL already contains /s/teachersbureau
   const BACKEND_API_BASE_URL = process.env.BACKEND_API_BASE_URL;
 
-  // Public API URL with site context
-  const PUBLIC_API_URL = `${BACKEND_API_BASE_URL}/s/${SITE_KEY}/api/public`;
+  // Do NOT add /s/teachersbureau here again
+  const PUBLIC_API_URL = `${BACKEND_API_BASE_URL}/api/public`;
 
   // Fetch categories
   const getCategory = async () => {
     try {
       const response = await axios.get(
-        `${PUBLIC_API_URL}/category`,
+        `${PUBLIC_API_URL}/category`
       );
 
       setBlogPost((prev) => ({
@@ -50,7 +45,7 @@ const AllBlogs = ({ selectedCategory = null }) => {
     } catch (error) {
       console.error(
         "Error fetching categories:",
-        error?.response?.data || error.message,
+        error?.response?.data || error.message
       );
     }
   };
@@ -64,7 +59,7 @@ const AllBlogs = ({ selectedCategory = null }) => {
     try {
       const url = categorySlug
         ? `${PUBLIC_API_URL}/blog?category=${encodeURIComponent(
-            categorySlug,
+            categorySlug
           )}&page=${pageNo}`
         : `${PUBLIC_API_URL}/blog?page=${pageNo}`;
 
@@ -81,8 +76,8 @@ const AllBlogs = ({ selectedCategory = null }) => {
 
         const uniquePosts = Array.from(
           new Map(
-            merged.map((item) => [item._id, item]),
-          ).values(),
+            merged.map((item) => [item._id, item])
+          ).values()
         );
 
         return {
@@ -93,7 +88,7 @@ const AllBlogs = ({ selectedCategory = null }) => {
     } catch (error) {
       console.error(
         "Error fetching posts:",
-        error?.response?.data || error.message,
+        error?.response?.data || error.message
       );
 
       setHasMore(false);
@@ -123,7 +118,7 @@ const AllBlogs = ({ selectedCategory = null }) => {
         observer.current.observe(node);
       }
     },
-    [dataLoading, hasMore],
+    [dataLoading, hasMore]
   );
 
   // Initial categories load
@@ -168,29 +163,28 @@ const AllBlogs = ({ selectedCategory = null }) => {
             </h1>
 
             <p className="text-xs font-me">
-              Our team help students and parents stay ahead of changing academic
-              trends. We provide insights into new learning methods, educational
-              opportunities, exam updates, and effective study practices to
-              support better learning and long-term academic success.
+              Our team help students and parents stay ahead of changing
+              academic trends. We provide insights into new learning methods,
+              educational opportunities, exam updates, and effective study
+              practices to support better learning and long-term academic
+              success.
             </p>
           </div>
         </div>
 
         {/* Category Tabs */}
         <div className="w-full space-y-5 pb-10">
-
           <div className="no-scrollbar overflow-x-auto flex flex-nowrap gap-2 w-full lg:w-[80%] mx-auto">
-
             {[
               { _id: "all", name: "All Post", slug: "all" },
-              ...blogPost?.categoryList,
-            ]?.map(({ _id, name, slug }, index) => (
+              ...(blogPost?.categoryList || []),
+            ].map(({ _id, name, slug }, index) => (
               <button
                 key={_id || index}
                 onClick={() =>
                   toggleQueryParam(
                     "category",
-                    encodeURIComponent(slug),
+                    encodeURIComponent(slug)
                   )
                 }
                 className={`px-4 py-2 border text-[13px] first-letter:capitalize flex-shrink-0 ${
@@ -202,7 +196,6 @@ const AllBlogs = ({ selectedCategory = null }) => {
                 {name}
               </button>
             ))}
-
           </div>
 
           {/* Posts Section */}
@@ -231,7 +224,6 @@ const AllBlogs = ({ selectedCategory = null }) => {
             {/* Grid of Articles */}
             {blogPost?.postList?.length > 1 && (
               <div className="w-full grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
-
                 {allPost?.map(
                   (
                     {
@@ -243,10 +235,10 @@ const AllBlogs = ({ selectedCategory = null }) => {
                       createdAt,
                       slug,
                     },
-                    index,
+                    index
                   ) => {
                     const postDate = moment(createdAt).format(
-                      "MMM DD, YYYY",
+                      "MMM DD, YYYY"
                     );
 
                     const isLast =
@@ -268,9 +260,8 @@ const AllBlogs = ({ selectedCategory = null }) => {
                         />
                       </div>
                     );
-                  },
+                  }
                 )}
-
               </div>
             )}
 
@@ -278,7 +269,6 @@ const AllBlogs = ({ selectedCategory = null }) => {
             {!dataLoading &&
               blogPost?.postList?.length < 1 && (
                 <div className="flex-center flex-col gap-2 py-10">
-
                   <div className="bg-primaryLight text-3xl animate-pulse p-5 rounded-3xl text-primary">
                     <PiEmptyBold />
                   </div>
@@ -292,7 +282,6 @@ const AllBlogs = ({ selectedCategory = null }) => {
                     moved or doesn&apos;t exist. Please check your spelling
                     or try another search.
                   </span>
-
                 </div>
               )}
 
