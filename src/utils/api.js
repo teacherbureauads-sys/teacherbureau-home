@@ -1,7 +1,10 @@
 import axios from "axios";
 
+// BACKEND_API_BASE_URL already includes the "/s/<site>" prefix — it is
+// computed in next.config.mjs (from SITE_KEY), not here. Adding "/s/..."
+// again in this file was creating URLs like
+// ".../s/teachersbureau/s/teachersbureau/api/public/..." which is a 404.
 const BACKEND_API_BASE_URL = process.env.BACKEND_API_BASE_URL;
-const SITE_KEY = "teachersbureau";
 
 if (!BACKEND_API_BASE_URL && typeof window !== "undefined") {
   console.error(
@@ -10,8 +13,7 @@ if (!BACKEND_API_BASE_URL && typeof window !== "undefined") {
 }
 
 // Common public API URL
-const publicApi = (path) =>
-  `${BACKEND_API_BASE_URL}/s/${SITE_KEY}/api/public${path}`;
+const publicApi = (path) => `${BACKEND_API_BASE_URL}/api/public${path}`;
 
 export async function getSinglePost(slug) {
   try {
