@@ -96,7 +96,7 @@ export default function PopupForm() {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm px-5">
-      <div className="relative w-full max-w-md bg-white rounded-xl p-6 sm:p-8 border-4 border-#FF2A00">
+      <div className="relative w-full max-w-md bg-white rounded-xl p-6 sm:p-8 border-4 border-[#FF2A00]>
         <button
           onClick={() => setOpen(false)}
           aria-label="Close"
