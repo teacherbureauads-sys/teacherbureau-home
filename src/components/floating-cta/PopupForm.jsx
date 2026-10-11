@@ -152,7 +152,7 @@ export default function PopupForm() {
         </h2>
 
         <p className="mb-6 text-sm text-gray-500">
-          Leave Your Details And Our Team Will Call You Back...
+          Leave Your Details — We’ll Help You Find the Right Tutor.
         </p>
 
         <form
@@ -255,7 +255,7 @@ export default function PopupForm() {
             type="submit"
             className="mt-2 rounded-md bg-[#F95008] py-3 font-semibold text-white transition-colors hover:bg-[#F95008] disabled:opacity-60"
           >
-            {loading ? "Submitting..." : "Get a FREE Demo Class"}
+            {loading ? ("Submitting...") : (<>Get a{" "}<span className="font-extrabold text-red-600 text-base">FREE</span>{" "}Demo Class</>)}
           </button>
         </form>
       </div>
