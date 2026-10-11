@@ -152,7 +152,7 @@ export default function PopupForm() {
         </h2>
 
         <p className="mb-6 text-sm text-gray-500">
-          Leave Your Details — We’ll Help You Find the Right Tutor.
+          Leave Your Details — We’ll Help You Find the Right Tutor or Female Tutor Near You.
         </p>
 
         <form
