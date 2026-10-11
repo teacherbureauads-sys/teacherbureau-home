@@ -148,7 +148,7 @@ export default function PopupForm() {
           id="popup-title"
           className="mb-1 pr-7 text-xl font-extrabold text-[#F95008]"
         >
-          Find the right tutor for you
+          Find Affordable Tutors 
         </h2>
 
         <p className="mb-6 text-sm text-gray-500">
