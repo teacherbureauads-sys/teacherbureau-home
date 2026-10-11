@@ -3,14 +3,14 @@
 import { Phone } from "lucide-react";
 
 export default function FloatingCTA() {
-  const phoneNumber = "+91XXXXXXXXXX";
-  const whatsappNumber = "91XXXXXXXXXX";
+  const phoneNumber = "+917715889123";
+  const whatsappNumber = "917715889123";
 
   return (
     <div className="fixed bottom-6 right-5 z-50 flex flex-col gap-3">
       {/* Call Button */}
       <a
-        href={`tel:${phoneNumber}`}
+        href={`tel:${917715889123}`}
         aria-label="Call Teachers Bureau"
         className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg transition-all duration-300 hover:scale-110 hover:bg-blue-700 hover:shadow-xl"
       >
@@ -19,7 +19,7 @@ export default function FloatingCTA() {
 
       {/* WhatsApp Button — official WhatsApp glyph, not a generic chat bubble */}
       <a
-        href={`https://wa.me/${whatsappNumber}?text=Hello%20Teachers%20Bureau,%20I%20want%20to%20know%20about%20your%20tutoring%20services.`}
+        href={`https://wa.me/${917715889123}?text=Hello%20Teachers%20Bureau,%20I%20want%20to%20know%20about%20your%20tutoring%20services.`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
