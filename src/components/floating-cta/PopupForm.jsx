@@ -1,16 +1,20 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { contactSubmit } from "~/utils/api";
 import { errorToast, successToast } from "~/utils/toastMessage";
 import { reportLeadConversion } from "~/utils/gtag";
 
-const DELAY_MS = 2000;
+const INITIAL_DELAY_MS = 5000;
+const REPEAT_DELAY_MS = 30000;
 
 export default function PopupForm() {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const repeatTimerRef = useRef(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -24,16 +28,28 @@ export default function PopupForm() {
     source: "website",
   });
 
-  const [loading, setLoading] = useState(false);
-
-  // Show popup after 2 seconds, then repeat every 2 seconds.
+  // First popup after 5 seconds.
   useEffect(() => {
-    const timer = setInterval(() => {
+    const initialTimer = setTimeout(() => {
       setOpen(true);
-    }, DELAY_MS);
+    }, INITIAL_DELAY_MS);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearTimeout(initialTimer);
+      clearTimeout(repeatTimerRef.current);
+    };
   }, []);
+
+  // Start the repeat countdown only after the popup is closed.
+  const closePopup = () => {
+    setOpen(false);
+
+    clearTimeout(repeatTimerRef.current);
+
+    repeatTimerRef.current = setTimeout(() => {
+      setOpen(true);
+    }, REPEAT_DELAY_MS);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -88,7 +104,9 @@ export default function PopupForm() {
       successToast("Thanks! We'll get back to you shortly.");
       reportLeadConversion();
 
-      setOpen(false);
+      // Close after successful submission.
+      // The next popup will appear after 30 seconds.
+      closePopup();
 
       setFormData({
         name: "",
@@ -122,7 +140,7 @@ export default function PopupForm() {
       >
         <button
           type="button"
-          onClick={() => setOpen(false)}
+          onClick={closePopup}
           aria-label="Close popup"
           className="absolute right-4 top-4 rounded-md p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-700"
         >
