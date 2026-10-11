@@ -5,10 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { contactSubmit } from "~/utils/api";
 import { errorToast, successToast } from "~/utils/toastMessage";
-import { reportLeadConversion } from "~/utils/gtag";
 
-const INITIAL_DELAY_MS = 3000;
-const REPEAT_DELAY_MS = 5000;
+const INITIAL_DELAY_MS = 5000;
+const REPEAT_DELAY_MS = 30000;
 
 export default function PopupForm() {
   const [open, setOpen] = useState(false);
@@ -28,7 +27,7 @@ export default function PopupForm() {
     source: "website",
   });
 
-  // First popup after 5 seconds.
+  // First popup appears 5 seconds after page load.
   useEffect(() => {
     const initialTimer = setTimeout(() => {
       setOpen(true);
@@ -40,7 +39,7 @@ export default function PopupForm() {
     };
   }, []);
 
-  // Start the repeat countdown only after the popup is closed.
+  // Reopen 30 seconds after the visitor closes the popup.
   const closePopup = () => {
     setOpen(false);
 
@@ -90,8 +89,8 @@ export default function PopupForm() {
         .join(" ");
 
       const payload = {
-        name: formData.name.trim(),
-        mobile: formData.mobile.trim(),
+        name: formData.name,
+        mobile: formData.mobile,
         company: formData.company,
         source: formData.source,
         message: prefixedMessage
@@ -102,11 +101,6 @@ export default function PopupForm() {
       await contactSubmit(payload);
 
       successToast("Thanks! We'll get back to you shortly.");
-      reportLeadConversion();
-
-      // Close after successful submission.
-      // The next popup will appear after 30 seconds.
-      closePopup();
 
       setFormData({
         name: "",
@@ -119,6 +113,9 @@ export default function PopupForm() {
         company: "",
         source: "website",
       });
+
+      // Close and schedule the next popup.
+      closePopup();
     } catch (error) {
       errorToast(
         error?.message || "Failed to submit, please try again"
@@ -131,31 +128,31 @@ export default function PopupForm() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4 py-4">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm px-5 py-4">
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="popup-title"
-        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-xl border-4 border-[#FF2A00] bg-white p-5 sm:p-8"
+        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-xl border-4 border-primary bg-white p-6 sm:p-8"
       >
         <button
           type="button"
           onClick={closePopup}
           aria-label="Close popup"
-          className="absolute right-4 top-4 rounded-md p-1 text-gray-400 transition hover:bg-gray-100 hover:text-gray-700"
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-700"
         >
           <X size={20} />
         </button>
 
         <h2
           id="popup-title"
-          className="mb-1 pr-8 text-xl font-extrabold text-primary"
+          className="mb-1 pr-7 text-xl font-extrabold text-primary"
         >
           Find the right tutor for you
         </h2>
 
         <p className="mb-6 text-sm text-gray-500">
-          Leave your details and our team will call you back.
+          Leave your details and our team will call you back today.
         </p>
 
         <form
@@ -180,7 +177,6 @@ export default function PopupForm() {
             onChange={handleChange}
             placeholder="Phone Number"
             autoComplete="tel"
-            inputMode="tel"
             className="w-full rounded-md border border-grayLight px-4 py-2.5 text-sm outline-none focus:border-primary"
           />
 
@@ -239,9 +235,9 @@ export default function PopupForm() {
                   ? "I teach..."
                   : "I'm looking for..."}
               </option>
-              <option value="Online">Online Tuition</option>
-              <option value="Offline">Offline Tuition</option>
               <option value="Home">Home Tuition</option>
+              <option value="Online">Online Tuition</option>
+              <option value="Offline">Teachers Place</option>
             </select>
           )}
 
@@ -251,13 +247,13 @@ export default function PopupForm() {
             onChange={handleChange}
             placeholder="What are you looking for? (optional)"
             rows={2}
-            className="w-full resize-y rounded-md border border-grayLight px-4 py-2.5 text-sm outline-none focus:border-primary"
+            className="w-full rounded-md border border-grayLight px-4 py-2.5 text-sm outline-none focus:border-primary"
           />
 
           <button
             disabled={loading}
             type="submit"
-            className="mt-2 rounded-md bg-primary py-3 font-semibold text-white transition-colors hover:bg-primaryDark disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-2 rounded-md bg-primary py-3 font-semibold text-white transition-colors hover:bg-primaryDark disabled:opacity-60"
           >
             {loading ? "Submitting..." : "Get a Call Back"}
           </button>
