@@ -8,7 +8,7 @@ import { errorToast, successToast } from "~/utils/toastMessage";
 import { reportLeadConversion } from "~/utils/gtag";
 
 const INITIAL_DELAY_MS = 5000;
-const REPEAT_DELAY_MS = 30000;
+const REPEAT_DELAY_MS = 4000;
 
 export default function PopupForm() {
   const [open, setOpen] = useState(false);
