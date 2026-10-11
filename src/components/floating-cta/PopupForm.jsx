@@ -7,7 +7,7 @@ import { reportLeadConversion } from "~/utils/gtag";
 
 // Shows 3 seconds after every page load — no "only once" restriction,
 // so it reappears each time the page is loaded/reloaded.
-const DELAY_MS = 3000;
+const DELAY_MS = 1000;
 
 export default function PopupForm() {
   const [open, setOpen] = useState(false);
