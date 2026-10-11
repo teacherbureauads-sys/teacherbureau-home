@@ -7,8 +7,8 @@ import { contactSubmit } from "~/utils/api";
 import { errorToast, successToast } from "~/utils/toastMessage";
 import { reportLeadConversion } from "~/utils/gtag";
 
-const INITIAL_DELAY_MS = 4000;
-const REPEAT_DELAY_MS = 4000;
+const INITIAL_DELAY_MS = 3000;
+const REPEAT_DELAY_MS = 5000;
 
 export default function PopupForm() {
   const [open, setOpen] = useState(false);
