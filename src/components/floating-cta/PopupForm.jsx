@@ -152,7 +152,7 @@ export default function PopupForm() {
         </h2>
 
         <p className="mb-6 text-sm text-gray-500">
-          Leave your details and our team will call you back today.
+          Leave Your Details And Our Team Will Call You Back...
         </p>
 
         <form
