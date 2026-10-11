@@ -255,7 +255,7 @@ export default function PopupForm() {
             type="submit"
             className="mt-2 rounded-md bg-[#F95008] py-3 font-semibold text-white transition-colors hover:bg-[#F95008] disabled:opacity-60"
           >
-            {loading ? "Submitting..." : "Get a Free DEMO"}
+            {loading ? "Submitting..." : "Get a Free Demo Class"}
           </button>
         </form>
       </div>
