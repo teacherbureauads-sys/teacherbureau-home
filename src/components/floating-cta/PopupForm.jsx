@@ -133,7 +133,7 @@ export default function PopupForm() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="popup-title"
-        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-xl border-4 border-primary bg-white p-6 sm:p-8"
+        className="relative max-h-[90vh] w-full max-w-md overflow-y-auto rounded-xl border-4 border-{#F95008} bg-white p-6 sm:p-8"
       >
         <button
           type="button"
