@@ -166,7 +166,7 @@ export default function PopupForm() {
             onChange={handleChange}
             placeholder="Full Name"
             autoComplete="name"
-            className="w-full rounded-md border border-grayLight px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
+            className="w-full rounded-md border border-gray px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
           />
 
           <input
@@ -177,7 +177,7 @@ export default function PopupForm() {
             onChange={handleChange}
             placeholder="Phone Number"
             autoComplete="tel"
-            className="w-full rounded-md border border-grayLight px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
+            className="w-full rounded-md border border-gray px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
           />
 
           <div className="flex gap-3">
@@ -187,7 +187,7 @@ export default function PopupForm() {
               onChange={handleChange}
               placeholder="City / Area"
               autoComplete="address-level2"
-              className="w-1/2 min-w-0 rounded-md border border-grayLight px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
+              className="w-1/2 min-w-0 rounded-md border border-gray px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
             />
 
             <input
@@ -197,7 +197,7 @@ export default function PopupForm() {
               placeholder="Pin Code"
               inputMode="numeric"
               autoComplete="postal-code"
-              className="w-1/2 min-w-0 rounded-md border border-grayLight px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
+              className="w-1/2 min-w-0 rounded-md border border-gray px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
             />
           </div>
 
@@ -214,7 +214,7 @@ export default function PopupForm() {
                 tuitionMode: "",
               }));
             }}
-            className="w-full rounded-md border border-grayLight bg-white px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
+            className="w-full rounded-md border border-gray bg-white px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
           >
             <option value="">I am a...</option>
             <option value="Parent">Parent</option>
@@ -228,7 +228,7 @@ export default function PopupForm() {
               name="tuitionMode"
               value={formData.tuitionMode}
               onChange={handleChange}
-              className="w-full rounded-md border border-grayLight bg-white px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
+              className="w-full rounded-md border border-gray bg-white px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
             >
               <option value="">
                 {formData.role === "Teacher"
@@ -247,7 +247,7 @@ export default function PopupForm() {
             onChange={handleChange}
             placeholder="What are you looking for? (optional)"
             rows={2}
-            className="w-full rounded-md border border-grayLight px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
+            className="w-full rounded-md border border-gray px-4 py-2.5 text-sm outline-none focus:border-[#F95008]"
           />
 
           <button
