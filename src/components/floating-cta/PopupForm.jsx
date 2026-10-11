@@ -6,8 +6,8 @@ import { X } from "lucide-react";
 import { contactSubmit } from "~/utils/api";
 import { errorToast, successToast } from "~/utils/toastMessage";
 
-const INITIAL_DELAY_MS = 5000;
-const REPEAT_DELAY_MS = 30000;
+const INITIAL_DELAY_MS = 3000;
+const REPEAT_DELAY_MS = 5000;
 
 export default function PopupForm() {
   const [open, setOpen] = useState(false);
@@ -255,7 +255,7 @@ export default function PopupForm() {
             type="submit"
             className="mt-2 rounded-md bg-[#F95008] py-3 font-semibold text-white transition-colors hover:bg-[#F95008] disabled:opacity-60"
           >
-            {loading ? "Submitting..." : "Get a Free Demo Class"}
+            {loading ? "Submitting..." : "Get a FREE Demo Class"}
           </button>
         </form>
       </div>
