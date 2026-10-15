@@ -7,7 +7,7 @@ import { contactSubmit } from "~/utils/api";
 import { errorToast, successToast } from "~/utils/toastMessage";
 
 const INITIAL_DELAY_MS = 3000;
-const REPEAT_DELAY_MS = 5000;
+const REPEAT_DELAY_MS = 8000;
 
 export default function PopupForm() {
   const [open, setOpen] = useState(false);
